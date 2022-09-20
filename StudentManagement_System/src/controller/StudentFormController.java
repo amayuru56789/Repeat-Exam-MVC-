@@ -85,6 +85,20 @@ public class StudentFormController {
     }
 
     public void UpdateOnAction(ActionEvent actionEvent) {
+        Student s1 = new Student(
+                txtID.getText(),txtName.getText(),txtEmail.getText(),txtContact.getText(),
+                txtAddress.getText(),txtNic.getText()
+        );
+        try {
+            if (new StudentController().updateStudent(s1))
+                new Alert(Alert.AlertType.CONFIRMATION,"Student Updated...").show();
+            else
+                new Alert(Alert.AlertType.WARNING,"Try again..").show();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {

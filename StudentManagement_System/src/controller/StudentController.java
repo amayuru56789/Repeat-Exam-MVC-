@@ -31,7 +31,14 @@ public class StudentController implements StudentService{
 
     @Override
     public boolean updateStudent(Student s1) throws SQLException, ClassNotFoundException {
-        return false;
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement("UPDATE Student SET studentName=? ,email=? ,contact=? ,address=? ,nic=? WHERE studentId=?");
+        pstm.setObject(1,s1.getStudentName());
+        pstm.setObject(2,s1.getEmail());
+        pstm.setObject(3,s1.getContact());
+        pstm.setObject(4,s1.getAddress());
+        pstm.setObject(5,s1.getNic());
+        pstm.setObject(6,s1.getStudentId());
+        return pstm.executeUpdate()>0;
     }
 
     @Override
