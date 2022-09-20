@@ -1,11 +1,13 @@
 package views.tm;
 
+import model.Student;
+
 /**
  * @author Amayru
  * @created 20/09/2022 - 10:54
  * @project StudentManagement_System
  */
-public class StudentTM {
+public class StudentTM extends Student {
     private String studentId;
     private String studentName;
     private String email;

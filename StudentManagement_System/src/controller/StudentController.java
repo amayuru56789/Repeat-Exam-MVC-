@@ -5,6 +5,7 @@ import model.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -45,6 +46,21 @@ public class StudentController implements StudentService{
 
     @Override
     public ArrayList<Student> getAllStudent() throws SQLException, ClassNotFoundException {
-        return null;
+        Connection con = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = con.prepareStatement("select * from Student");
+        ResultSet rst = pstm.executeQuery();
+        ArrayList<Student> students = new ArrayList<>();
+        while (rst.next()){
+            students.add(new Student(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            ));
+        }
+        /*System.out.println(students);*/
+        return students;
     }
 }
