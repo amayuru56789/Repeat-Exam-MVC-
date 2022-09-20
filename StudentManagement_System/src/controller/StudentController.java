@@ -1,7 +1,10 @@
 package controller;
 
+import db.DbConnection;
 import model.Student;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -14,7 +17,15 @@ public class StudentController implements StudentService{
 
     @Override
     public boolean saveStudent(Student s1) throws SQLException, ClassNotFoundException {
-        return false;
+        Connection con = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = con.prepareStatement("insert into Student values (?,?,?,?,?,?)");
+        pstm.setObject(1,s1.getStudentId());
+        pstm.setObject(2,s1.getStudentName());
+        pstm.setObject(3,s1.getEmail());
+        pstm.setObject(4,s1.getContact());
+        pstm.setObject(5,s1.getAddress());
+        pstm.setObject(6,s1.getNic());
+        return (pstm.executeUpdate()>0);
     }
 
     @Override
