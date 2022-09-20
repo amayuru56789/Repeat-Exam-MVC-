@@ -34,6 +34,7 @@ public class StudentFormController {
     public TableColumn colContact;
     public TableColumn colAddress;
     public TableColumn colNic;
+    public TextField txtSearch;
 
     public void initialize(){
         colID.setCellValueFactory(new PropertyValueFactory<>("studentId"));
@@ -102,6 +103,35 @@ public class StudentFormController {
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
+        try {
+            if (new StudentController().deleteStudent(txtID.getText())){
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted").show();
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Try again").show();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void SearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String studentId = txtSearch.getText();
+        Student s1 = new StudentController().getStudent(studentId);
+        if (s1==null){
+            new Alert(Alert.AlertType.WARNING, "Empty Result SET...").show();
+        }else {
+            setData(s1);
+        }
+    }
+
+    private void setData(Student s1) {
+        txtID.setText(s1.getStudentId());
+        txtName.setText(s1.getStudentName());
+        txtEmail.setText(s1.getEmail());
+        txtContact.setText(s1.getContact());
+        txtAddress.setText(s1.getAddress());
+        txtNic.setText(s1.getNic());
     }
 }

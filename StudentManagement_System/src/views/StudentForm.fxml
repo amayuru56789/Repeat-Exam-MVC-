@@ -35,5 +35,7 @@
       <Button layoutX="569.0" layoutY="475.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="25.0" prefWidth="88.0" text="Delete" />
       <TextField fx:id="txtAddress" layoutX="640.0" layoutY="89.0" prefHeight="25.0" prefWidth="141.0" promptText="address" />
       <TextField fx:id="txtNic" layoutX="51.0" layoutY="128.0" prefHeight="25.0" prefWidth="141.0" promptText="nic" />
+      <Button layoutX="693.0" layoutY="44.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="25.0" prefWidth="88.0" text="Search" />
+      <TextField fx:id="txtSearch" layoutX="569.0" layoutY="44.0" prefHeight="25.0" prefWidth="88.0" promptText="SID" />
    </children>
 </AnchorPane>

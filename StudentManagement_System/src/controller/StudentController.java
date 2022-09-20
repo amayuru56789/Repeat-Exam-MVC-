@@ -43,11 +43,29 @@ public class StudentController implements StudentService{
 
     @Override
     public boolean deleteStudent(String studentId) throws SQLException, ClassNotFoundException {
-        return false;
+        if (DbConnection.getInstance().getConnection().prepareStatement("DELETE FROM Student WHERE studentId='"+studentId+"'").executeUpdate()>0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public Student getStudent(String studentId) throws SQLException, ClassNotFoundException {
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement("select * from Student where studentId=?");
+        pstm.setObject(1,studentId);
+        ResultSet rst = pstm.executeQuery();
+        if (rst.next()){
+            return new Student(
+              rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            );
+        }
         return null;
     }
 
